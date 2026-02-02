@@ -18,3 +18,8 @@ export const getEstaciones = async (idMunicipio: string): Promise<Estacion[]> =>
   const { data } = await fuelApi.get<Estacion[]>(`/estaciones/municipio/${idMunicipio}`);
   return data;
 };
+
+export const getEstacion = async (idEstacion: string): Promise<Estacion[]> => {
+  const { data } = await fuelApi.get<Estacion[]>(`/estaciones/detalles/${idEstacion}`);
+  return data;
+};
