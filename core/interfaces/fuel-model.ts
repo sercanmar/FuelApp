@@ -10,40 +10,29 @@ export interface Municipio {
   idProvincia: number;
 }
 export interface Estacion {
-
-  idEstacion: number;
-  idMunicipio: number;
-
-  nombreEstacion: string;
-  marca: string;
-  direccion: string;
-  codPostal: string;
-  localidad: string;
-  provincia: string;
-  provinciaDistrito: string;
-
-  latitud: string;
-  longitud: string;
-  margen: string; 
-
-  horario: string;
-  tipoVenta: string;
-  lastUpdate: string;
-
-  Gasolina95: string | null;
-  Gasolina95_media: string | null;
-  Gasolina98: string | null;
-  Gasolina98_media: string | null;
-  Diesel: string | null;
-  Diesel_media: string | null;
-  DieselPremium: string | null;
-  DieselPremium_media: string | null;
-  DieselB: string | null; 
-  DieselB_media: string | null;
-  GLP: string | null;
-  GLP_media: string | null;
-
-  Hidrogeno: string | null;
-  GNC: string | null;
-  GNL: string | null;
+  idEstacion:          number;
+  nombreEstacion:      string;
+  longitud:            string;
+  latitud:             string;
+  margen:              string;
+  codPostal:           string;
+  direccion:           string;
+  horario:             string;
+  tipoVenta:           string;
+  idMunicipio:         number;
+  lastUpdate:          Date;
+  localidad:           string;
+  Gasolina95:          string;
+  Gasolina95_media:    string;
+  Gasolina98:          string;
+  Gasolina98_media:    string;
+  Diesel:              string;
+  Diesel_media:        string;
+  DieselPremium:       string;
+  DieselPremium_media: string;
+  DieselB_media:       string;
+  GLP_media:           string;
+  provincia:           string;
+  provinciaDistrito:   string;
+  marca:               string;
 }

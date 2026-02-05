@@ -2,7 +2,7 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getProvincias } from '@/core/api/fuel-api';
+import { getProvincias } from '../../core/actions/fuel.action';
 
 export default function HomeScreen() {
   const { data: provincias, isLoading, isError } = useQuery({

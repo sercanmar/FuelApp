@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
-import { getMunicipios } from '../../core/api/fuel-api';
+import { getMunicipios } from '../../core/actions/fuel.action';
 
 export default function PantallaMunicipios() {
   const { id } = useLocalSearchParams();

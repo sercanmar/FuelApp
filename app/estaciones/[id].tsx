@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity } from 'react-native';
-import { getEstaciones } from '../../core/api/fuel-api';
+import { getEstaciones } from '../../core/actions/fuel.action';
 
 const imagenGenerica = require('../../assets/images/react-logo.png');
 
@@ -83,10 +83,10 @@ export default function PantallaEstaciones() {
                       </View>
                     )}
     
-                    {item.GLP && (
+                    {item.GLP_media && (
                       <View className="bg-orange-100 px-2 py-1 rounded">
                         <Text className="text-orange-800 text-xs font-bold">
-                          GLP: {item.GLP}€
+                          GLP: {item.GLP_media}€
                         </Text>
                       </View>
                     )}

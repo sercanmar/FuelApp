@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, ScrollView, Text, View, Image } from 'react-native';
-import { getEstacion } from '../../core/api/fuel-api';
+import { getEstacion } from '../../core/actions/fuel.action';
 
 const imagenGenerica = require('../../assets/images/react-logo.png');
 
@@ -107,16 +107,20 @@ export default function PantallaEstacion() {
                 <Text className="text-slate-900 text-lg">
                     Diesel +: {estacion.DieselPremium} €
                 </Text>
+
             </View>
         )}
 
-        {estacion.GLP && (
+        {estacion.GLP_media && (
             <View className="bg-orange-100 px-4 py-2 rounded w-full">
                 <Text className="text-orange-800 font-bold text-lg">
-                    GLP: {estacion.GLP} €
+                    GLP: {estacion.GLP_media} €
                 </Text>
             </View>
         )}
+
+              <Text className="text-lg font-bold mb-3">Precios Historicos:</Text>
+
 
       </View>
 
