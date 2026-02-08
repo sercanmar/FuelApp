@@ -1,4 +1,5 @@
 import {fuelApi} from '../api/fuel-api'
+import { EstacionRadio } from '@/core/interfaces/fuel-model';
 
 import { Provincia, Municipio,Estacion } from '../interfaces/fuel-model';
 
@@ -24,5 +25,19 @@ export const getEstacion = async (idEstacion: string) => {
 
 export const getHistorico = async (idEstacion: string) => {
   const { data } = await fuelApi.get<Estacion[]>(`/estaciones/historico/${idEstacion}`);
+  return data;
+};
+export const getEstacionesPorRadio = async (lat: number, lon: number, radio: number = 10) => {
+  
+  const { data } = await fuelApi.get<EstacionRadio[]>('/estaciones/radio', {
+    params: {
+      latitud: lat,
+      longitud: lon,
+      radio: radio,
+      pagina: 1,
+      limite: 20
+    }
+  });
+  
   return data;
 };

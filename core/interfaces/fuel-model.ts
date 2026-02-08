@@ -36,3 +36,14 @@ export interface Estacion {
   provinciaDistrito:   string;
   marca:               string;
 }
+export interface EstacionRadio {
+    idEstacion: number;
+    nombreEstacion: string;
+    direccion: string;
+    longitud: number;   
+    latitud: number;    
+    Gasolina95: number; 
+    Diesel: number;     
+    distancia: number;
+    marca: string;
+}

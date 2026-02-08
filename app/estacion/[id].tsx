@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, ScrollView, Text, View, Image } from 'react-native';
-import { getEstacion } from '../../core/actions/fuel.action';
+import { getEstacion, getHistorico } from '@/core/actions/fuel.action'
 
 const imagenGenerica = require('../../assets/images/react-logo.png');
 
@@ -9,29 +9,42 @@ export default function PantallaEstacion() {
   const { id } = useLocalSearchParams();
   const idEstacion = Array.isArray(id) ? id[0] : id;
 
-  const { data: datosApi, isLoading, isError } = useQuery({
+  const { 
+    data: datosApi, 
+    isLoading: loadingEst, 
+    isError: errorEst 
+  } = useQuery({
     queryKey: ['estacion', idEstacion], 
     queryFn: () => getEstacion(idEstacion as string),
     enabled: !!idEstacion,
   });
 
-  if (isLoading) {
+  const { 
+    data: historico, 
+    isLoading: loadingHist 
+  } = useQuery({
+    queryKey: ['historico', idEstacion], 
+    queryFn: () => getHistorico(idEstacion as string),
+    enabled: !!idEstacion,
+  });
+  if (loadingEst || loadingHist) {
     return (
       <View className="flex-1 justify-center items-center">
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>cargando estacion...</Text>
+        <Text>cargando datos...</Text>
       </View>
     );
   }
+  const estacion = Array.isArray(datosApi) ? datosApi[0] : datosApi;
 
-  if (isError || !datosApi) {
+  if (errorEst || !datosApi) {
     return (
       <View className="flex-1 justify-center items-center">
         <Text className="text-red-500">error al cargar estacion</Text>
       </View>
     );
   }
-  const estacion = Array.isArray(datosApi) ? datosApi[0] : datosApi;
+  
   if (!estacion) {
     return (
       <View className="flex-1 justify-center items-center">
@@ -76,7 +89,7 @@ export default function PantallaEstacion() {
 
       <Text className="text-lg font-bold mb-3">Precios Actuales:</Text>
 
-      <View className="flex-row flex-wrap gap-3 pb-10">
+      <View className="flex-row flex-wrap gap-3 pb-6 border-b border-gray-200 mb-4">
         
         {estacion.Gasolina95 && (
             <View className="bg-green-100 px-4 py-2 rounded w-full">
@@ -107,7 +120,6 @@ export default function PantallaEstacion() {
                 <Text className="text-slate-900 text-lg">
                     Diesel +: {estacion.DieselPremium} €
                 </Text>
-
             </View>
         )}
 
@@ -119,10 +131,9 @@ export default function PantallaEstacion() {
             </View>
         )}
 
-              <Text className="text-lg font-bold mb-3">Precios Historicos:</Text>
-
-
       </View>
+
+      
 
     </ScrollView>
   );
