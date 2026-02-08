@@ -6,7 +6,7 @@ import { getEstacion, getEstacionesPorRadio } from '@/core/actions/fuel.action';
 import CustomMap from '@/presentation/components/shared/CustomMap';
 import { Marker } from 'react-native-maps';
 
-export default function StationMapScreen() {
+export default function EstacionMapScreen() {
     const { id } = useLocalSearchParams();
     const navigation = useNavigation();
     const idEstacion = Array.isArray(id) ? id[0] : id;
@@ -15,22 +15,22 @@ export default function StationMapScreen() {
         queryFn: () => getEstacion(idEstacion as string),
         enabled: !!idEstacion,
     });
-    const currentStation = Array.isArray(estacion) ? estacion[0] : estacion;
+    const currentEstacion = Array.isArray(estacion) ? estacion[0] : estacion;
     const { data: cercanas } = useQuery({
-        queryKey: ['cercanas-mapa', currentStation?.latitud, currentStation?.longitud],
+        queryKey: ['cercanas-mapa', currentEstacion?.latitud, currentEstacion?.longitud],
         queryFn: () => {
-            if (!currentStation) return [];
+            if (!currentEstacion) return [];
 
-            const lat = typeof currentStation.latitud === 'string' ? parseFloat(currentStation.latitud.replace(',', '.')) : currentStation.latitud;
-            const lon = typeof currentStation.longitud === 'string' ? parseFloat(currentStation.longitud.replace(',', '.')) : currentStation.longitud;
+            const lat = typeof currentEstacion.latitud === 'string' ? parseFloat(currentEstacion.latitud.replace(',', '.')) : currentEstacion.latitud;
+            const lon = typeof currentEstacion.longitud === 'string' ? parseFloat(currentEstacion.longitud.replace(',', '.')) : currentEstacion.longitud;
             return getEstacionesPorRadio(lat, lon, 5); 
         },
-        enabled: !!currentStation,
+        enabled: !!currentEstacion,
     });
 
 
 
-    if (isLoading || !currentStation) {
+    if (isLoading || !currentEstacion) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ActivityIndicator size="large" color="#000" />
@@ -38,8 +38,8 @@ export default function StationMapScreen() {
         );
     }
 
-    const lat = typeof currentStation.latitud === 'string' ? parseFloat(currentStation.latitud.replace(',', '.')) : currentStation.latitud;
-    const long = typeof currentStation.longitud === 'string' ? parseFloat(currentStation.longitud.replace(',', '.')) : currentStation.longitud;
+    const lat = typeof currentEstacion.latitud === 'string' ? parseFloat(currentEstacion.latitud.replace(',', '.')) : currentEstacion.latitud;
+    const long = typeof currentEstacion.longitud === 'string' ? parseFloat(currentEstacion.longitud.replace(',', '.')) : currentEstacion.longitud;
 
     return (
         <View style={{ flex: 1 }}>
@@ -50,7 +50,7 @@ export default function StationMapScreen() {
 
                 <Marker 
                     coordinate={{ latitude: lat, longitude: long }}
-                    title={currentStation.nombreEstacion}
+                    title={currentEstacion.nombreEstacion}
                     pinColor="blue" 
                     style={{ zIndex: 999 }} 
                 />

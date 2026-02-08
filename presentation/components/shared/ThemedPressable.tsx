@@ -1,4 +1,4 @@
-import { Text, Pressable, StyleSheet, PressableProps } from 'react-native'
+import { Text, Pressable, PressableProps } from 'react-native'
 
 interface Props extends PressableProps {
     children: string;
@@ -6,20 +6,17 @@ interface Props extends PressableProps {
 
 const ThemedPressable = ({ children, ...rest }: Props) => {
     return (
-        <Pressable style={styles.btnPrimary} {...rest}>
-            <Text style={{ color: 'white' }}>{children}</Text>
+        <Pressable 
+            className="bg-black py-3 px-5 rounded-full m-2 active:opacity-80"
+            {...rest}
+        >
+            <Text className="text-white text-center font-bold text-base">
+                {children}
+            </Text>
         </Pressable>
     )
 }
 
 export default ThemedPressable
 
-const styles = StyleSheet.create({
-    btnPrimary: {
-        backgroundColor: 'black',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 100,
-        margin: 10,
-    }
-})
+
