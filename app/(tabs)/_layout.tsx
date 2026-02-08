@@ -23,10 +23,10 @@ export default function TabLayout() {
         }}
       />
      <Tabs.Screen
-        name="mapa" 
+        name="radio" 
         options={{
-          title: 'Mapa',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="map" color={color} />,
+          title: 'Radio',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="radio-outline" color={color} />,
         }}
       />
     </Tabs>

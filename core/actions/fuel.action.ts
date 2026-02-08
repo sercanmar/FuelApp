@@ -35,7 +35,7 @@ export const getEstacionesPorRadio = async (lat: number, lon: number, radio: num
       longitud: lon,
       radio: radio,
       pagina: 1,
-      limite: 20
+      limite: 100
     }
   });
   
